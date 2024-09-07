@@ -1,11 +1,13 @@
 #!/bin/bash
 
 PROXY_LIST_URL="http://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt"
-OUTPUT_FILE="proxy_pings.txt"
+OUTPUT_FILE="proxy-list-raw.txt"
 
 rm -f "$OUTPUT_FILE"
+echo "Fetching proxy list from $PROXY_LIST_URL"
 
 curl -s "$PROXY_LIST_URL" | while read -r proxy; do
+  echo "Processing proxy: $proxy"
   IFS=":" read -r ip port <<< "$proxy"
   
   # Check if the port is open
